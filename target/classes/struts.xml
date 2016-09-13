@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+        "http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+
+    <package name="userManager" namespace="/" extends="struts-default">
+        <!--<interceptors>-->
+            <!--<interceptor name="PermissionInterceptor" class="Interceptor.PermissionInterceptor"></interceptor>-->
+        <!--</interceptors>-->
+        <action name="login" class="com.Action.UserManagerAction" method="login">
+            <!--<interceptor-ref name="PermissionInterceptor"/>-->
+            <result name="success">/main/index.html</result>
+            <result name="error">/Error.html</result>
+        </action>
+        <action name="regist" class="com.Action.UserManagerAction" method="regist">
+            <!--<interceptor-ref name="PermissionInterceptor"/>-->
+            <result name="success">/main/index.html</result>
+        </action>
+        <action name="modifyUserInfo" class="com.Action.UserManagerAction" method="modifyUserInfo">
+            <!--<interceptor-ref name="PermissionInterceptor"/>-->
+            <result name="success">/main/index.html</result>
+        </action>
+    </package>
+
+
+</struts>

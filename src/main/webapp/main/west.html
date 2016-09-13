@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="aa" class="easyui-accordion" style="width:300px;height:96%;">
+    <div title="Title1" data-options="fit:true,collapsible:false,iconCls:'icon-save'"
+         style="overflow:auto;padding:10px;">
+        <ul class="westBar" id="admin">
+            <li id="adminUser"><span class="icon-search" style="height:16px;width:16px;display:inline-block"></span>用户管理
+            </li>
+            <li id="adminRole"><span class="icon-search" style="height:16px;width:16px;display:inline-block"></span>角色管理
+            </li>
+            <li id="adminPermission" title="权限管理"><span class="icon-search"
+                                           style="height:16px;width:16px;display:inline-block"></span>权限管理
+            </li>
+        </ul>
+
+    </div>
+    <!-- <div title="Title2" data-options="iconCls:'icon-reload',selected:true" style="padding:10px;">
+         content2
+     </div>
+     <div title="Title3">
+         content3
+     </div>-->
+</div>
+<script style="text/javascript">
+    /*用于将accordion和tabs关联起来。
+     * 建议：一个accordion下的每一个panel作为一个模块便于扩展。
+     * */
+    $(function () {
+        $('ul.westBar li').on('click', function () {
+            $('ul.westBar li').removeClass('active');
+            $(this).addClass('active');
+            var id = $(this).attr('id');
+            if($(this).hasClass('zdialog')){ // 这里可以扩展对话框菜单
+                $('#' + id + '-dialog').dialog('open');
+                return;
+            }
+            var title = $(this).attr('title');
+            var iconCls = $(this).find("span").attr('class');
+            var parent = $(this).parent().attr('id');
+            addTabs(id, title, iconCls, parent);
+        });
+    });
+    function addTabs(id, title, iconCls, parent) {
+        if ($('#admin_tabs').tabs('exists', title)) {
+            alert('1');
+            $('#admin_tabs').tabs('select', title);
+            return;
+        }
+        ;
+        if (!iconCls) {
+            iconCls = 'icon-ok';
+        }
+        $('#admin_tabs').tabs('add', {
+            title: title,
+            href: /*contextPath +*/ '/' + parent + '/' + id,
+            iconCls: iconCls,
+            onLoadError: function (data) {
+                var tab = $('#admin_tabs').tabs('getSelected');
+                var body = tab.panel('body');
+                if (data.status == 401) {
+                    body.html(data.responseText);
+                } else {
+                    body.html('<h1>加载出错</h1>');
+                }
+            }
+        });
+
+    }
+
+</script>
+</body>
+
+</html>

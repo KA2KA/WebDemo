@@ -1,0 +1,80 @@
+body,
+html h2 div {
+	font-family: arial, tahoma, 宋体;
+	color: #333;
+	line-height: 27px;
+	font-size: 14px;
+}
+
+.onepage {
+	height: 700px;
+	margin-top: -30px;
+	width: 100%;
+}
+
+.carousel-control.left {
+	background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 0px, transparent 100%);
+	background-repeat: no-repeat;
+}
+
+.carousel-control.right {
+	background-image: linear-gradient(to left, rgba(0, 0, 0, 0) 0px, transparent 100%);
+	background-repeat: no-repeat;
+}
+
+.carousel-control .glyphicon-chevron-left,
+.carousel-control .icon-prev {
+	left: 30%;
+	/*margin-left: -10px;*/
+}
+
+.carousel-control .glyphicon-chevron-right,
+.carousel-control .icon-next {
+	right: 30%;
+	/*	margin-right: -10px;*/
+}
+
+.carousel {
+	position: absolute;
+	margin: 0;
+	left: 0;
+}
+
+.login {
+	position: absolute;
+	display: none;
+	background: rgba(0, 0, 0, .5);
+	border: 1px solid transparent;
+}
+
+.login-modern {
+	margin-top: -500px;
+	margin-left: 100px;
+	width: 300px;
+	line-height: 50px;
+	padding: 5px 35px 5px 35px;
+	position: relative;
+	overflow: hidden;
+}
+
+.login-title {
+	text-align: center;
+}
+
+
+.myicon {
+	background-position: -201px -199px;
+	position: absolute;
+	width: 60px;
+	height: 60px;
+	display: block;
+	top: 0px;
+	right: 0px;
+	background-image: url(https://t.alipayobjects.com/images/rmsweb/T1el0hXaJbXXXXXXXX.png);
+	background-repeat: no-repeat;
+	cursor: pointer;
+	z-index: 101;
+	-webkit-transition: background-position .2s cubic-bezier(0.25, .5, .5, .9);
+	-moz-transition: background-position .2s cubic-bezier(0.25, .5, .5, .9);
+	transition: background-position .2s cubic-bezier(0.25, .5, .5, .9);
+}
