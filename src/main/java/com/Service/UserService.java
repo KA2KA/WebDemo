@@ -2,6 +2,8 @@ package com.Service;
 
 import com.Model.UserEntity;
 
+import java.util.Map;
+
 /**
  * Service层方法的命名规则：操作+业务
  * Created by wuwan on 2016/8/21.
@@ -18,10 +20,11 @@ public interface UserService {
     /**
      * 用户登陆
      *
-     * @param user
+     * @param
+     * @param session
      * @return
      */
-    UserEntity getUserLogin(UserEntity user);
+    UserEntity getUserLogin(UserEntity user, Map<String, Object> session);
 
     /**
      * 更新用户信息
@@ -45,6 +48,7 @@ public interface UserService {
      * @return
      */
     boolean getUserByName(String username);
+
 
 
 }

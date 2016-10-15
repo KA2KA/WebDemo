@@ -4,22 +4,29 @@
         "http://struts.apache.org/dtds/struts-2.3.dtd">
 <struts>
 
-    <package name="userManager" namespace="/" extends="struts-default">
+    <package name="userManager" namespace="/" extends="struts-default,json-default">
         <!--<interceptors>-->
-            <!--<interceptor name="PermissionInterceptor" class="Interceptor.PermissionInterceptor"></interceptor>-->
+        <!--<interceptor name="PermissionInterceptor" class="Interceptor.PermissionInterceptor"></interceptor>-->
         <!--</interceptors>-->
         <action name="login" class="com.Action.UserManagerAction" method="login">
             <!--<interceptor-ref name="PermissionInterceptor"/>-->
-            <result name="success">/main/index.html</result>
+            <result name="success">/index.html</result>
             <result name="error">/Error.html</result>
         </action>
         <action name="regist" class="com.Action.UserManagerAction" method="regist">
             <!--<interceptor-ref name="PermissionInterceptor"/>-->
-            <result name="success">/main/index.html</result>
+            <result name="success">index.html</result>
         </action>
         <action name="modifyUserInfo" class="com.Action.UserManagerAction" method="modifyUserInfo">
             <!--<interceptor-ref name="PermissionInterceptor"/>-->
-            <result name="success">/main/index.html</result>
+            <result name="success">index.html</result>
+        </action>
+        <action name="listMenuTreeByUser" class="com.Action.MenuManagerAction" method="listMenuTreeByUser">
+            <!--<interceptor-ref name="PermissionInterceptor"/>-->
+         <result type="json">
+             <param name="root">result</param>
+             
+         </result>
         </action>
     </package>
 

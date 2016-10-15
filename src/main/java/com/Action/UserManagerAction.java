@@ -2,12 +2,12 @@ package com.Action;
 
 
 import com.Model.UserEntity;
+import com.Vo.MenuTree;
 import com.google.gson.Gson;
-import com.util.IdWorker;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
-import static org.apache.struts2.interceptor.DateTextFieldInterceptor.DateWord.s;
+import java.util.List;
 
 /**
  * 用户的管理层
@@ -16,21 +16,24 @@ import static org.apache.struts2.interceptor.DateTextFieldInterceptor.DateWord.s
 @Controller
 @Scope("prototype")
 public class UserManagerAction extends BaseAction<UserEntity> {
+//    private static final Logger logger = LoggerFactory.getLogger(UserManagerAction.class);
 
     /**
-     * 用户登录
+     * 用户登录:获取用户信息，获取用户角色和菜单权限
      */
     public String login() {
-        System.out.println("--------into login ------------------");
-        System.out.println(model);
-        UserEntity user = userService.getUserLogin(model);
-        if (user != null) {
-            session.put("userEntity", user);
-            System.out.println("登陆成功：" + user);
-            return SUCCESS;
+        try {
+            UserEntity userLogin = userService.getUserLogin(model, session);
+            System.out.println("userLogin.getId():" + userLogin.getId());
+            List<MenuTree> mTlist = (List<MenuTree>) session.get("menu");
+            for (MenuTree mt :mTlist) {
+                System.out.println("mt.getId():"+mt.getId());
+
+            }
+        } catch (Exception e) {
+            return ERROR;
         }
-        System.out.println("登陆失败");
-        return ERROR;
+        return SUCCESS;
     }
 
     /**
@@ -57,8 +60,8 @@ public class UserManagerAction extends BaseAction<UserEntity> {
             System.out.println("存在该用户");
             return ERROR;
         } else {
-            String id = new IdWorker().getId();
-            model.setId(id);
+//            String id = new IdWorker().getId();
+//            model.setId();
             userService.saveRegist(model);
             session.put("userEntity", model);
         }

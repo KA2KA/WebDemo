@@ -3,47 +3,35 @@ package com.Model;
 import javax.persistence.*;
 
 /**
- * Created by wuwan on 2016/8/20.
+ * Created by wuwan on 2016/9/30.
  */
 @Entity
 @Table(name = "autority_table", schema = "basissql", catalog = "")
 public class AutorityEntity {
-    private Integer id;
-    private Integer menuid;
-    private Integer roleid;
+    private String id;
+    private Integer vision;
     private MenuEntity menuTableByMenuid;
     private RoleEntity roleTableByRoleid;
 
     @Id
     @Column(name = "ID")
-    public Integer getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Integer id) {
+    public void setId(String id) {
         this.id = id;
     }
 
-    @Basic
-    @Transient
-    @Column(name = "MENUID")
-    public Integer getMenuid() {
-        return menuid;
-    }
-
-    public void setMenuid(Integer menuid) {
-        this.menuid = menuid;
-    }
 
     @Basic
-    @Transient
-    @Column(name = "ROLEID")
-    public Integer getRoleid() {
-        return roleid;
+    @Column(name = "VISION")
+    public Integer getVision() {
+        return vision;
     }
 
-    public void setRoleid(Integer roleid) {
-        this.roleid = roleid;
+    public void setVision(Integer vision) {
+        this.vision = vision;
     }
 
     @Override
@@ -54,8 +42,8 @@ public class AutorityEntity {
         AutorityEntity that = (AutorityEntity) o;
 
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
-        if (menuid != null ? !menuid.equals(that.menuid) : that.menuid != null) return false;
-        if (roleid != null ? !roleid.equals(that.roleid) : that.roleid != null) return false;
+
+        if (vision != null ? !vision.equals(that.vision) : that.vision != null) return false;
 
         return true;
     }
@@ -63,8 +51,7 @@ public class AutorityEntity {
     @Override
     public int hashCode() {
         int result = id != null ? id.hashCode() : 0;
-        result = 31 * result + (menuid != null ? menuid.hashCode() : 0);
-        result = 31 * result + (roleid != null ? roleid.hashCode() : 0);
+        result = 31 * result + (vision != null ? vision.hashCode() : 0);
         return result;
     }
 

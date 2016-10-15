@@ -13,7 +13,6 @@
         <mapping class="com.Model.RoleEntity"/>
         <mapping class="com.Model.UserEntity"/>
         <mapping class="com.Model.UserRoleEntity"/>
-        <mapping class="com.Model.Test"/>
 
         <!-- DB schema will be updated if needed -->
         <!-- <property name="hbm2ddl.auto">update</property> -->

@@ -16,10 +16,12 @@
         <property name="hibernateProperties">
             <props>
                 <prop key="hibernate.dialect">org.hibernate.dialect.MySQL5Dialect</prop>
+                <prop key="hibernate.show_sql">true</prop>
                 <prop key="hibernate.format_sql">true</prop>
-            </props>
+               </props>
         </property>
         <property name="packagesToScan" value="com.Model"/>
     </bean>
     <context:component-scan base-package="com"/>
+    <context:annotation-config/>
 </beans>

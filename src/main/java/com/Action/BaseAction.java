@@ -6,6 +6,7 @@ import com.opensymphony.xwork2.ModelDriven;
 import org.apache.struts2.interceptor.ApplicationAware;
 import org.apache.struts2.interceptor.RequestAware;
 import org.apache.struts2.interceptor.SessionAware;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Scope;
 import org.springframework.stereotype.Controller;
 
@@ -19,7 +20,7 @@ import java.util.Map;
 @Controller
 @Scope("prototype")
 public class BaseAction<T> extends ActionSupport implements RequestAware, SessionAware, ApplicationAware, ModelDriven<T> {
-    @Resource
+    @Autowired
     protected UserService userService;
     protected T model;
 

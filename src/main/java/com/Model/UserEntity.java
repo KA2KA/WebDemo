@@ -4,24 +4,29 @@ import javax.persistence.*;
 import java.util.Collection;
 
 /**
- * Created by wuwan on 2016/8/20.
+ * Created by wuwan on 2016/9/30.
  */
 @Entity
 @Table(name = "user_table", schema = "basissql", catalog = "")
 public class UserEntity {
-    private String id;
+    public  static final Integer NORMAL = 1;//用户状态正常
+    public static final Integer LOGOUT = 0;//用户状态注销
+    private Integer id;
     private String username;
     private String password;
     private String nickname;
-    private Collection<UserRoleEntity> userroleTablesById;
+    private String alias;
+    private Integer state;
+    private Integer vision;
+    private Collection<UserRoleEntity> userRoleById;
 
     @Id
     @Column(name = "ID")
-    public String getId() {
+    public Integer getId() {
         return id;
     }
 
-    public void setId(String id) {
+    public void setId(Integer id) {
         this.id = id;
     }
 
@@ -55,6 +60,36 @@ public class UserEntity {
         this.nickname = nickname;
     }
 
+    @Basic
+    @Column(name = "ALIAS")
+    public String getAlias() {
+        return alias;
+    }
+
+    public void setAlias(String alias) {
+        this.alias = alias;
+    }
+
+    @Basic
+    @Column(name = "STATE")
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
+    @Basic
+    @Column(name = "VISION")
+    public Integer getVision() {
+        return vision;
+    }
+
+    public void setVision(Integer vision) {
+        this.vision = vision;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -66,6 +101,9 @@ public class UserEntity {
         if (username != null ? !username.equals(that.username) : that.username != null) return false;
         if (password != null ? !password.equals(that.password) : that.password != null) return false;
         if (nickname != null ? !nickname.equals(that.nickname) : that.nickname != null) return false;
+        if (alias != null ? !alias.equals(that.alias) : that.alias != null) return false;
+        if (state != null ? !state.equals(that.state) : that.state != null) return false;
+        if (vision != null ? !vision.equals(that.vision) : that.vision != null) return false;
 
         return true;
     }
@@ -76,26 +114,18 @@ public class UserEntity {
         result = 31 * result + (username != null ? username.hashCode() : 0);
         result = 31 * result + (password != null ? password.hashCode() : 0);
         result = 31 * result + (nickname != null ? nickname.hashCode() : 0);
+        result = 31 * result + (alias != null ? alias.hashCode() : 0);
+        result = 31 * result + (state != null ? state.hashCode() : 0);
+        result = 31 * result + (vision != null ? vision.hashCode() : 0);
         return result;
     }
 
-    @OneToMany(mappedBy = "userTableByUserid")
-    public Collection<UserRoleEntity> getUserroleTablesById() {
-        return userroleTablesById;
+    @OneToMany(mappedBy = "userByUserid")
+    public Collection<UserRoleEntity> getUserRoleById() {
+        return userRoleById;
     }
 
-    public void setUserroleTablesById(Collection<UserRoleEntity> userroleTablesById) {
-        this.userroleTablesById = userroleTablesById;
-    }
-
-    @Override
-    public String toString() {
-        return "UserEntity{" +
-                "id=" + id +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
-                ", nickname='" + nickname + '\'' +
-                ", userroleTablesById=" + userroleTablesById +
-                '}';
+    public void setUserRoleById(Collection<UserRoleEntity> userRoleById) {
+        this.userRoleById = userRoleById;
     }
 }

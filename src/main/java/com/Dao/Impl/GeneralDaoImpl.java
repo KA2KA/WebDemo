@@ -1,15 +1,16 @@
 package com.Dao.Impl;
 
+
 import com.Dao.GeneralDao;
+import com.util.Pagination;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
+import org.hibernate.Transaction;
 import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import com.util.Pagination;
 
-import javax.annotation.Resource;
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
@@ -20,7 +21,7 @@ import java.util.List;
  */
 
 @Repository("baseDao")
-public class GeneralDaoImpl<T, ID extends Serializable> implements GeneralDao<T, ID> {
+public abstract class GeneralDaoImpl<T, ID extends Serializable> implements GeneralDao<T, ID> {
 
 
     private Session session;
@@ -31,15 +32,19 @@ public class GeneralDaoImpl<T, ID extends Serializable> implements GeneralDao<T,
     private Class<T> entityClass;
 
     public Class<T> getEntityClass() {
-        if (entityClass == null) {
-            entityClass = (Class<T>) ((ParameterizedType) this.getClass().getGenericSuperclass()).getActualTypeArguments()[0];
+
+        if (entityClass == null && getClass().getGenericSuperclass() instanceof ParameterizedType) {
+            entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         }
         return entityClass;
     }
 
     @Override
     public void save(T t) {
-        this.getSession().save(t);
+        session = this.getSession();
+        Transaction transaction = session.beginTransaction();
+        session.save(t);
+        transaction.commit();
     }
 
     @Override
@@ -80,8 +85,11 @@ public class GeneralDaoImpl<T, ID extends Serializable> implements GeneralDao<T,
 
     @Override
     public T get(ID id) {
-        return (T) this.getSession().get(getEntityClass(), id);
+
+        T t = this.getSession().get(this.getEntityClass(), id);
+        return t;
     }
+
 
     @Override
     public void queryBySQL(String sqlString, Object... values) {
@@ -171,12 +179,13 @@ public class GeneralDaoImpl<T, ID extends Serializable> implements GeneralDao<T,
 
     @Override
     public long countByHQL(String hqlString, Object... values) {
-        NativeQuery query = this.getSession().createNativeQuery(hqlString);
+        Query query = this.getSession().createQuery(hqlString);
         if (values != null) {
             for (int i = 0; i < values.length; i++) {
                 query.setParameter(i, values[i]);
             }
         }
+        System.out.println("hql:"+hqlString);
         return (long) query.uniqueResult();
     }
 
@@ -184,7 +193,5 @@ public class GeneralDaoImpl<T, ID extends Serializable> implements GeneralDao<T,
         return sessionFactory.openSession();
     }
 
-    public void setSessionFactory(SessionFactory sessionFactory) {
-        this.sessionFactory = sessionFactory;
-    }
+
 }

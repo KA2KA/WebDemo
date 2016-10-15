@@ -1,48 +1,94 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
+
 <head>
-    <meta charset="UTF-8">
-    <title>前台主页</title>
-    <!--自适应分辨率-->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="http://cdn.bootcss.com/bootstrap/3.3.0/css/bootstrap-theme.min.css">
-    <script src="http://cdn.bootcss.com/jquery/1.11.1/jquery.min.js"></script>
-    <script src="http://cdn.bootcss.com/bootstrap/3.3.0/js/bootstrap.min.js"></script>
-
-
-    <!--http://mnfan.github.io/rose/-->
+    <meta charset="utf-8">
+    <title>前端BootStrap主页</title>
+    <link href="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
 </head>
+
 <body>
-<nav class="nav navbar-inverse navbar-static-top" role="navigation">
+<!-- 导航栏-->
+<nav class="nav navbar-inverse" role="navigation">
     <div class="container">
-        <p>导航栏</p>
+        <div class="navbar-header">
+            <button class="navbar-toggle" type="button" data-toggle="collapse" data-target="#example-navbar-collapse">
+                <span class="sr-only">切换导航</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="#" class="navbar-brand">One</a>
+        </div>
+        <div class="collapse navbar-collapse" id="example-navbar-collapse">
+            <ul class="nav navbar-nav">
+                <li class="active">
+                    <a href="#">Two</a>
+                </li>
+                <li>
+                    <a href="#">Three</a>
+                </li>
+                <li>
+                    <a href="#">Four</a>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <button class="btn btn-primary btn-lg" data-toggle="modal" data-target="#myModal">
+                        Login
+                    </button>
+                </li>
+            </ul>
+        </div>
     </div>
 </nav>
-<div class="container">
-    <div class="table-responise">
-        <table class="table table-striped">
-            <thead>
-            <tr>
-                <th>描述</th>
-                <th>方法</th>
-            </tr>
-            </thead>
-            <tbody>
-            <tr>
-                <td>登陆</td>
-                <td><a href="http://localhost:8080/login.action?username='test'&password='test'">login</a></td>
-            </tr>
-            <tr></tr>
-
-            </tbody>
-
-        </table>
-
-
+<!-- 模态框（Modal） -->
+<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel"
+     aria-hidden="true">
+    <div class="modal-dialog" style="width: 30%">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-hidden="true">×
+                </button>
+                <h4 class="modal-title text-center" id="myModalLabel">登陆切糕管理系统</h4>
+            </div>
+            <form class="form" method="post">
+                <div class="modal-body">
+                    <div class="input-group">
+                        <span></span>
+                        <label id="loginInfoMessage" style="display: none" class="label label-info">登陆失败</label>
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-user"></span>
+                        <input id="username" type="text" class="form-control" placeholder="username">
+                    </div>
+                    <br>
+                    <div class="input-group">
+                        <span class="input-group-addon glyphicon glyphicon-user"></span>
+                        <input id="password" type="password" class="form-control" placeholder="password">
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <a href="javascript:UserAction.Method.loginAction()" target="_blank " class="btn btn-primary">Sign in</a>
+                    <!--<button type="button" class="btn btn-primary" onclick="UserAction.Method.loginAction()">Sign in</button>-->
+                </div>
+            </form>
+        </div><!-- /.modal-content -->
+    </div><!-- /.modal-dialog -->
+</div><!-- /.modal -->
+<!--正文内容-->
+<div style="margin-top: 5px" class="container">
+    <div class="jumbotron">
+        <h1>欢迎登陆页面！</h1>
+        <p>欢迎来到我的后台系统。</p>
+        <p><a class="btn btn-primary btn-lg" role="button"> 学习更多</a>
+        </p>
     </div>
-
-
 </div>
 </body>
+<script src="http://cdn.static.runoob.com/libs/jquery/2.1.1/jquery.min.js"></script>
+<script src="http://cdn.static.runoob.com/libs/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="script/frist.js"></script>
 </html>

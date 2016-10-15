@@ -4,7 +4,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 /**
- * Created by wuwan on 2016/8/20.
+ * Created by wuwan on 2016/9/30.
  */
 @Entity
 @Table(name = "role_table", schema = "basissql", catalog = "")
@@ -12,6 +12,8 @@ public class RoleEntity {
     private Integer id;
     private String rolename;
     private String description;
+    private Integer state;
+    private Integer vision;
     private Collection<AutorityEntity> autorityTablesById;
     private Collection<UserRoleEntity> userroleTablesById;
 
@@ -45,6 +47,26 @@ public class RoleEntity {
         this.description = description;
     }
 
+    @Basic
+    @Column(name = "STATE")
+    public Integer getState() {
+        return state;
+    }
+
+    public void setState(Integer state) {
+        this.state = state;
+    }
+
+    @Basic
+    @Column(name = "VISION")
+    public Integer getVision() {
+        return vision;
+    }
+
+    public void setVision(Integer vision) {
+        this.vision = vision;
+    }
+
     @Override
     public boolean equals(Object o) {
         if (this == o) return true;
@@ -55,6 +77,8 @@ public class RoleEntity {
         if (id != null ? !id.equals(that.id) : that.id != null) return false;
         if (rolename != null ? !rolename.equals(that.rolename) : that.rolename != null) return false;
         if (description != null ? !description.equals(that.description) : that.description != null) return false;
+        if (state != null ? !state.equals(that.state) : that.state != null) return false;
+        if (vision != null ? !vision.equals(that.vision) : that.vision != null) return false;
 
         return true;
     }
@@ -64,6 +88,8 @@ public class RoleEntity {
         int result = id != null ? id.hashCode() : 0;
         result = 31 * result + (rolename != null ? rolename.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
+        result = 31 * result + (state != null ? state.hashCode() : 0);
+        result = 31 * result + (vision != null ? vision.hashCode() : 0);
         return result;
     }
 
@@ -76,7 +102,7 @@ public class RoleEntity {
         this.autorityTablesById = autorityTablesById;
     }
 
-    @OneToMany(mappedBy = "roleTableByRoleid")
+    @OneToMany(mappedBy = "roleByRoleid")
     public Collection<UserRoleEntity> getUserroleTablesById() {
         return userroleTablesById;
     }

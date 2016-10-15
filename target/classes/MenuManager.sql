@@ -85,11 +85,11 @@ alter table Autority_Table add constraint FK_Reference_3 foreign key (MENUID)
       references Menu_Table (ID) on delete restrict on update restrict;
 
 alter table Autority_Table add constraint FK_Reference_4 foreign key (ROLEID)
-      references Role_Table (ID) on delete restrict on update restrict;
+      references Role_Table (ROLEID) on delete restrict on update restrict;
 
 alter table UserRole_Table add constraint FK_Reference_1 foreign key (USERID)
-      references User_Table (ID) on delete restrict on update restrict;
+      references User_Table (USERID) on delete restrict on update restrict;
 
 alter table UserRole_Table add constraint FK_Reference_2 foreign key (ROLEID)
-      references Role_Table (ID) on delete restrict on update restrict;
+      references Role_Table (ROLEID) on delete restrict on update restrict;
 

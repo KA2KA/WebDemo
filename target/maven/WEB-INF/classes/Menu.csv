@@ -1,0 +1,5 @@
+ID#PARENTID#NAME#GRADE#URL#ACTION#STATE#ISLEAF#ICONCLS#VISION
+10##商品管理#1###1#0#icon-ok#0
+1010#10#商品记录#2###1#0#icon-add#0
+20##系统管理#1###1#0#icon-ok#0
+2010#20#用户记录#2###1#0#icon-add#0
