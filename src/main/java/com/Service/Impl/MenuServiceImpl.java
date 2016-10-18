@@ -6,12 +6,14 @@ import com.Dao.MenuDao;
 import com.Model.MenuEntity;
 import com.Service.MenuService;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 
 /**
  * Created by wuwan on 2016/9/30.
  */
+@Transactional
 @Service("menuService")
 public class MenuServiceImpl implements MenuService {
 

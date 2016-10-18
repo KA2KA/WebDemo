@@ -23,12 +23,10 @@ public class UserManagerAction extends BaseAction<UserEntity> {
      */
     public String login() {
         try {
-            UserEntity userLogin = userService.getUserLogin(model, session);
-            System.out.println("userLogin.getId():" + userLogin.getId());
+            userService.getUserLogin(model, session);
             List<MenuTree> mTlist = (List<MenuTree>) session.get("menu");
-            for (MenuTree mt :mTlist) {
-                System.out.println("mt.getId():"+mt.getId());
-
+            for (MenuTree mt : mTlist) {
+                System.out.println("mt.getId():" + mt.getId());
             }
         } catch (Exception e) {
             return ERROR;
@@ -42,7 +40,6 @@ public class UserManagerAction extends BaseAction<UserEntity> {
      * @return
      */
     public String checkName() {
-        System.out.println("-----into checkName---------");
         boolean isEXist = userService.getUserByName(model.getUsername());
 
         return SUCCESS;

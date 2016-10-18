@@ -9,7 +9,6 @@ import com.Service.UserService;
 import com.Vo.StateEnum;
 import com.util.IdWorker;
 import org.springframework.context.ApplicationContext;
-import org.springframework.util.DigestUtils;
 import org.springframework.web.context.support.WebApplicationContextUtils;
 
 import javax.servlet.ServletConfig;
@@ -34,6 +33,7 @@ public class InitDB extends HttpServlet {
         MenuService menuService = (MenuService) context.getBean("menuService");
         RoleService roleService = (RoleService) context.getBean("roleService");
         UserService userService = (UserService) context.getBean("userService");
+        System.out.println("menuService:"+menuService);
         initAdminUser(userService);
         initBasicRole(roleService);
         initMenuData(classpath, menuService);
@@ -95,11 +95,8 @@ public class InitDB extends HttpServlet {
                 if (menu == null) {
                     menu = new MenuEntity();
                     menu.setId(split[0]);
-                    if (!"".equals(split[1])) {
+                    if (!"".equals(split[1]))
                         menu.setParentid(Integer.parseInt(split[1]));
-                    } else {
-                        menu.setParentid(0);
-                    }
                     menu.setName(split[2]);
                     menu.setGrade(Integer.parseInt(split[3]));
                     menu.setUrl(split[4]);
@@ -107,6 +104,7 @@ public class InitDB extends HttpServlet {
                     menu.setState(Integer.parseInt(split[6]));
                     menu.setIsleaf(Integer.parseInt(split[7]));
                     menu.setIconcls(split[8]);
+                    menu.setVision(0);
                     menuService.saveMenu(menu);
                 }
             }

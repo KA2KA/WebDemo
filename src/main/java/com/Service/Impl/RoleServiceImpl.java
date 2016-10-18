@@ -6,10 +6,12 @@ import com.Model.RoleEntity;
 import com.Service.RoleService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 /**
  * Created by wuwan on 2016/9/21.
  */
+@Transactional
 @Service("roleService")
 public class RoleServiceImpl implements RoleService {
     @Autowired

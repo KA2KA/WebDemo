@@ -5,21 +5,22 @@ import com.Dao.GeneralDao;
 import com.util.Pagination;
 import org.hibernate.Session;
 import org.hibernate.SessionFactory;
-import org.hibernate.Transaction;
-import org.hibernate.query.NativeQuery;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
+import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 import java.util.List;
 
+import static org.apache.struts2.interceptor.DateTextFieldInterceptor.DateWord.s;
+
 /**
  * Created by wuwan on 2016/8/21.
  */
-
+@Transactional
 @Repository("baseDao")
 public abstract class GeneralDaoImpl<T, ID extends Serializable> implements GeneralDao<T, ID> {
 
@@ -32,7 +33,6 @@ public abstract class GeneralDaoImpl<T, ID extends Serializable> implements Gene
     private Class<T> entityClass;
 
     public Class<T> getEntityClass() {
-
         if (entityClass == null && getClass().getGenericSuperclass() instanceof ParameterizedType) {
             entityClass = (Class<T>) ((ParameterizedType) getClass().getGenericSuperclass()).getActualTypeArguments()[0];
         }
@@ -42,9 +42,7 @@ public abstract class GeneralDaoImpl<T, ID extends Serializable> implements Gene
     @Override
     public void save(T t) {
         session = this.getSession();
-        Transaction transaction = session.beginTransaction();
         session.save(t);
-        transaction.commit();
     }
 
     @Override
@@ -85,15 +83,14 @@ public abstract class GeneralDaoImpl<T, ID extends Serializable> implements Gene
 
     @Override
     public T get(ID id) {
-
-        T t = this.getSession().get(this.getEntityClass(), id);
+        T t = (T) this.getSession().get(this.getEntityClass(), id);
         return t;
     }
 
 
     @Override
     public void queryBySQL(String sqlString, Object... values) {
-        Query query = this.getSession().createNativeQuery(sqlString);
+        Query query = this.getSession().createQuery(sqlString);
         if (values != null) {
             for (int i = 0; i < values.length; i++) {
                 query.setParameter(i, values[i]);
@@ -105,7 +102,7 @@ public abstract class GeneralDaoImpl<T, ID extends Serializable> implements Gene
 
     @Override
     public T getBySQL(String sqlString, Object... values) {
-        Query query = this.getSession().createNativeQuery(sqlString);
+        Query query = this.getSession().createQuery(sqlString);
         if (values != null) {
             for (int i = 0; i < values.length; i++) {
                 query.setParameter(i, values[i]);
@@ -116,7 +113,7 @@ public abstract class GeneralDaoImpl<T, ID extends Serializable> implements Gene
 
     @Override
     public List<T> getListBySQL(String hqlString, Object... values) {
-        NativeQuery query = this.getSession().createNativeQuery(hqlString);
+        Query query = this.getSession().createQuery(hqlString);
         if (values != null) {
             for (int i = 0; i < values.length; i++) {
                 query.setParameter(i, values[i]);
@@ -141,6 +138,10 @@ public abstract class GeneralDaoImpl<T, ID extends Serializable> implements Gene
 
     @Override
     public T getByHQL(String hqlString, Object... values) {
+
+        System.out.println("sessionFactory:" + sessionFactory);
+        System.out.println("session:" + this.getSession());
+
         Query query = this.getSession().createQuery(hqlString);
         if (values != null) {
             for (int i = 0; i < values.length; i++) {
@@ -185,12 +186,12 @@ public abstract class GeneralDaoImpl<T, ID extends Serializable> implements Gene
                 query.setParameter(i, values[i]);
             }
         }
-        System.out.println("hql:"+hqlString);
-        return (long) query.uniqueResult();
+        return ((Number) query.uniqueResult()).intValue();
     }
 
     public Session getSession() {
-        return sessionFactory.openSession();
+        session = sessionFactory.openSession();
+        return session;
     }
 
 

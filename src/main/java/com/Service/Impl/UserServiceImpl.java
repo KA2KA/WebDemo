@@ -8,6 +8,7 @@ import com.Model.UserRoleEntity;
 import com.Service.UserService;
 import com.Vo.MenuTree;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import javax.annotation.Resource;
 import java.util.*;
@@ -15,6 +16,7 @@ import java.util.*;
 /**
  * Created by wuwan on 2016/8/21.
  */
+@Transactional
 @Service("userService")
 public class UserServiceImpl implements UserService {
 
@@ -44,7 +46,6 @@ public class UserServiceImpl implements UserService {
 //       获取用户角色并获取菜单权限列表
         List<MenuTree> return_ms = new ArrayList<>();
         if ("admin".equals(user.getUsername())) {
-            System.out.println("-----admin--------");
             List<MenuEntity> menus = menuDao.getAllMenus(MenuEntity.NORMAL);
             for (MenuEntity menu : menus) {
                 MenuTree menuTree = new MenuTree();
@@ -92,7 +93,7 @@ public class UserServiceImpl implements UserService {
      */
     @Override
     public boolean getUserByName(String username) {
-        StringBuilder hqlString = new StringBuilder("select count(username) from UserEntity where username = ?");
+        StringBuilder hqlString = new StringBuilder("select count(*) from UserEntity as u where u.username = ?");
         long count = userDao.countByHQL(hqlString.toString(), username);
         if (count > 0) {
             return true;

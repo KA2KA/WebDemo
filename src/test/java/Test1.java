@@ -24,7 +24,7 @@ public class Test1 {
             Session session = sessionFactory.openSession();
             Transaction transaction = session.beginTransaction();
             UserEntity user = new UserEntity();
-//            user.setId(10);
+            user.setId(101);
             user.setUsername("test");
             user.setPassword("test");
             session.save(user);
