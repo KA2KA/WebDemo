@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<dataSource name="MySQL - basissql@localhost">
+  <database-model serializer="dbm" rdbms="MYSQL" format-version="2.6">
+    <schema id="1" name="basissql">
+      <visible>1</visible>
+    </schema>
+    <schema id="2" name="information_schema"/>
+    <schema id="3" name="mysql"/>
+    <schema id="4" name="performance_schema"/>
+    <schema id="5" name="seckill"/>
+    <schema id="6" name="userdemo"/>
+    <schema id="7" name="wuwg"/>
+    <table id="8" parent="1" name="autority_table">
+      <comment>权限表：关联角色表和菜单表</comment>
+    </table>
+    <table id="9" parent="1" name="menu_table">
+      <comment>菜单表：用来添加菜单</comment>
+    </table>
+    <table id="10" parent="1" name="role_table">
+      <comment>角色表</comment>
+    </table>
+    <table id="11" parent="1" name="user_table">
+      <comment>用户表</comment>
+    </table>
+    <table id="12" parent="1" name="userrole_table">
+      <comment>用户角色表：用户表和角色表的中间表</comment>
+    </table>
+    <column id="13" parent="8" name="ID">
+      <comment>权限ID</comment>
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="14" parent="8" name="MENUID">
+      <comment>菜单ID</comment>
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="15" parent="8" name="ROLEID">
+      <comment>角色ID</comment>
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="16" parent="8" name="VISION">
+      <comment>乐观锁</comment>
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <index id="17" parent="8" name="FK_Reference_3">
+      <columns>MENUID</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="18" parent="8" name="FK_Reference_4">
+      <columns>ROLEID</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="19" parent="8" name="PRIMARY">
+      <columns>ID</columns>
+      <primary>1</primary>
+    </key>
+    <column id="20" parent="9" name="ID">
+      <comment>菜单ID</comment>
+      <mandatory>1</mandatory>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="21" parent="9" name="PARENTID">
+      <comment>父菜单ID</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="22" parent="9" name="NAME">
+      <comment>菜单名称</comment>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="23" parent="9" name="GRADE">
+      <comment>菜单等级</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="24" parent="9" name="URL">
+      <comment>前端的JS方法,用|分开</comment>
+      <data-type>varchar(400)|0</data-type>
+    </column>
+    <column id="25" parent="9" name="ACTION">
+      <comment>调用的Action方法,用|分开</comment>
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="26" parent="9" name="STATE">
+      <comment>菜单状态：0注销，1正常</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="27" parent="9" name="ISLEAF">
+      <comment>子节点：0:否，1是</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="28" parent="9" name="ICONCLS">
+      <comment>菜单icon</comment>
+      <data-type>varchar(200)|0</data-type>
+    </column>
+    <column id="29" parent="9" name="VISION">
+      <comment>乐观锁</comment>
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <key id="30" parent="9" name="PRIMARY">
+      <columns>ID</columns>
+      <primary>1</primary>
+    </key>
+    <column id="31" parent="10" name="ID">
+      <comment>角色ID</comment>
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="32" parent="10" name="ROLENAME">
+      <comment>角色名</comment>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="33" parent="10" name="DESCRIPTION">
+      <comment>描述</comment>
+      <data-type>varchar(50)|0</data-type>
+    </column>
+    <column id="34" parent="10" name="STATE">
+      <comment>角色状态：0注销，1正常</comment>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="35" parent="10" name="VISION">
+      <comment>乐观锁</comment>
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <key id="36" parent="10" name="PRIMARY">
+      <columns>ID</columns>
+      <primary>1</primary>
+    </key>
+    <column id="37" parent="11" name="ID">
+      <comment>用户ID</comment>
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="38" parent="11" name="USERNAME">
+      <comment>用户名</comment>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="39" parent="11" name="PASSWORD">
+      <comment>用户密码</comment>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="40" parent="11" name="NICKNAME">
+      <comment>昵称</comment>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="41" parent="11" name="ALIAS">
+      <comment>用户级别</comment>
+      <data-type>varchar(20)|0</data-type>
+    </column>
+    <column id="42" parent="11" name="STATE">
+      <comment>用户状态：0注销，1正常</comment>
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;1&apos;</default-expression>
+    </column>
+    <column id="43" parent="11" name="VISION">
+      <comment>乐观锁</comment>
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <key id="44" parent="11" name="PRIMARY">
+      <columns>ID</columns>
+      <primary>1</primary>
+    </key>
+    <column id="45" parent="12" name="ID">
+      <comment>主键ID</comment>
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+      <sequence-identity>1</sequence-identity>
+    </column>
+    <column id="46" parent="12" name="ROLEID">
+      <comment>角色ID</comment>
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="47" parent="12" name="USERID">
+      <comment>用户ID</comment>
+      <mandatory>1</mandatory>
+      <data-type>int(11)|0</data-type>
+    </column>
+    <column id="48" parent="12" name="VISION">
+      <comment>乐观锁</comment>
+      <data-type>int(11)|0</data-type>
+      <default-expression>&apos;0&apos;</default-expression>
+    </column>
+    <index id="49" parent="12" name="FK_Reference_1">
+      <columns>USERID</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <index id="50" parent="12" name="FK_Reference_2">
+      <columns>ROLEID</columns>
+      <desc-columns></desc-columns>
+    </index>
+    <key id="51" parent="12" name="PRIMARY">
+      <columns>ID</columns>
+      <primary>1</primary>
+    </key>
+    <foreign-key id="52" parent="12" name="FK_Reference_2">
+      <columns>ROLEID</columns>
+      <ref-key>~.role_table.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+    <foreign-key id="53" parent="12" name="FK_Reference_1">
+      <columns>USERID</columns>
+      <ref-key>~.user_table.PRIMARY</ref-key>
+      <cascade-update-rule>restrict</cascade-update-rule>
+      <cascade-delete-rule>restrict</cascade-delete-rule>
+    </foreign-key>
+  </database-model>
+</dataSource>

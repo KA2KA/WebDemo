@@ -8,19 +8,15 @@ import org.hibernate.SessionFactory;
 import org.hibernate.query.Query;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
-import org.springframework.transaction.annotation.Transactional;
 
 import java.io.Serializable;
 import java.lang.reflect.ParameterizedType;
 import java.util.Collection;
 import java.util.List;
 
-import static org.apache.struts2.interceptor.DateTextFieldInterceptor.DateWord.s;
-
 /**
  * Created by wuwan on 2016/8/21.
  */
-@Transactional
 @Repository("baseDao")
 public abstract class GeneralDaoImpl<T, ID extends Serializable> implements GeneralDao<T, ID> {
 
@@ -138,10 +134,6 @@ public abstract class GeneralDaoImpl<T, ID extends Serializable> implements Gene
 
     @Override
     public T getByHQL(String hqlString, Object... values) {
-
-        System.out.println("sessionFactory:" + sessionFactory);
-        System.out.println("session:" + this.getSession());
-
         Query query = this.getSession().createQuery(hqlString);
         if (values != null) {
             for (int i = 0; i < values.length; i++) {

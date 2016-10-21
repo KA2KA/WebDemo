@@ -3,4 +3,5 @@ ID#PARENTID#NAME#GRADE#URL#ACTION#STATE#ISLEAF#ICONCLS#VISION
 1010#10#商品记录#2###1#0#icon-add#0
 20##系统管理#1###1#0#icon-ok#0
 2010#20#用户管理#2###1#0#icon-add#0
+201010#2010#用户页面#3#/allUI/userManage.html##1#0#icon-add#0
 2020#20#角色管理#2###1#0#icon-add#0
